@@ -3,13 +3,20 @@ const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+
+//After importing, Icreate a filStorage and fileFilter for multer
+//as it says in documentation. Although I am new to multer
+//and I have a feeling the error is either in the multer diskStorage
+//or the fileFilter because it is either not set up correctly, or I made
+//a stupid mistake that I cant quite see.
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'images');
     },
     filename: (req, file, cb) => {
-        cb(null, new Date().toISOString() + '-' + file.originalname);
+        cb(null, uuidv4() + '-' + file.originalname);
     }
 });
 
@@ -37,6 +44,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
+
+//In app.post here, the error comes back as No image provided.
+// I would like to fix this error
 
 app.post("/userFeed/post", (req, res, next) => {
     if(!req.file){

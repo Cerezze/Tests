@@ -3,16 +3,25 @@ import { useState } from 'react';
 
 function App() {
   const [valThumbnail, setThumbnailVal] = useState('');
-  const [valImage, setImageVal] = useState('')
+  const [valImage, setImageVal] = useState('');
 
+  //creating useStates to hold my image and thmbnail title (text)
+
+  //this method extracts my value onCHange and sets it to valThumbnail
   const changeThumbnailVal = (e) => {
       setThumbnailVal(e.target.value);
   }
 
+  //this method extracts my filename and sets it to valImage onChange (input files)
   const changeImageVal = (e) => {
       console.log(e.target.files[0].name);
       setImageVal(e.target.files[0].name);
   }
+
+  //upon clicking accept, this function will create the formdate by
+  //appending the states that were set above and then using a fetch
+  //request, post the formdata to the server
+  //and thats all I want to do, see the backend for more
 
   const Accept = () => {
 
