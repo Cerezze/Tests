@@ -6,7 +6,7 @@ const multer = require('multer');
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'images'));
+        cb(null, 'images');
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString() + '-' + file.originalname);
@@ -38,9 +38,7 @@ app.use((req, res, next) => {
     next();
 });
 
-//app.use('/userFeed', userFeedRoutes);
-
-app.use("/userFeed/post", (req, res, next) => {
+app.post("/userFeed/post", (req, res, next) => {
     if(!req.file){
         const error = new Error('NO image provided.');
         error.statusCode = 422;

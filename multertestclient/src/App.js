@@ -21,12 +21,12 @@ function App() {
       formData.append('ThumbnailTitle', valThumbnail);
       formData.append('image', valImage);
 
-      for (const value of formData.values()) {
+      /*for (const value of formData.values()) {
         console.log(value);
       }
 
       console.log(formData.getAll('ThumbnailTitle'));
-
+      */
       fetch('http://localhost:3001/userFeed/post', {
           method: 'POST',
           body: formData
